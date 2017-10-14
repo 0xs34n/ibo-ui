@@ -50,12 +50,12 @@ class App extends Component {
     };
   }
 
-  rejectBounty() {
-
+  rejectBounty = () => {
+    console.log("reject bounty called");
   }
 
-  acceptBounty() {
-    
+  acceptBounty = () => {
+    console.log("accept bounty called");
   }
 
   componentDidMount() {
@@ -174,6 +174,8 @@ class App extends Component {
         {this.state.isAdmin ? (
           <Admin 
             bounties={this.state.bounties}
+            acceptBounty={this.acceptBounty}
+            rejectBounty={this.rejectBounty}
           />
         ) : (
           <Hunter

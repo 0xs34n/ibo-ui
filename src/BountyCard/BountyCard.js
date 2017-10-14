@@ -18,10 +18,6 @@ const picStyle = {
 };
 
 class BountyCard extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   onUpload = info => {
     const status = info.file.status;
     if (status !== "uploading") {

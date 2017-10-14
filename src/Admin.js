@@ -25,6 +25,8 @@ class Admin extends Component {
                   icon={bounty.upload}
                   details={bounty.details}
                   upload={bounty.upload}
+                  acceptBounty={this.props.acceptBounty}
+                  rejectBounty={this.props.rejectBounty}
                 />
               )
             } else {

@@ -40,16 +40,28 @@ class ClaimCard extends Component {
             src={this.props.upload}
             alt="bounty"
           />
-          <div 
+        </a>
+        <div 
             style={{
               display: "flex",
               justifyContent: "spaceBetween"
             }}
           >
-            <Button type="primary" className="claim-button"> ACCEPT </Button>
-            <Button type="danger" className="claim-button"> REJECT </Button>
+            <Button 
+              type="primary" 
+              className="claim-button"
+              onClick={this.props.acceptBounty}
+            > 
+              ACCEPT 
+            </Button>
+            <Button 
+              type="danger"
+              className="claim-button"
+              onClick={this.props.rejectBounty}
+            > 
+              REJECT
+            </Button>
           </div>
-        </a>
       </Card>
     );
   }
