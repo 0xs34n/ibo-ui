@@ -53,8 +53,19 @@ class App extends Component {
     };
   }
 
-  rejectClaim = () => {
-    console.log("reject bounty called");
+  rejectClaim = (index) => {
+    this.setState({
+      bounties: this.state.bounties.map((bounty, bountyIndex) => {
+        if (index === bountyIndex) {
+          return {
+            ...bounty,
+            upload: ""
+          };
+        } else {
+          return bounty;
+        }
+      })
+    });
   }
 
   acceptClaim = (bountyID, claimID) => {
@@ -112,7 +123,6 @@ class App extends Component {
   closeModal = index => {
     this.setState({
       bounties: this.state.bounties.map((bounty, bountyIndex) => {
-        console.log(bountyIndex, index);
         if (index === bountyIndex) {
           return {
             ...bounty,

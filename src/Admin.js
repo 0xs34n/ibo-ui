@@ -24,7 +24,7 @@ class Admin extends Component {
                   title={bounty.title}
                   upload={bounty.upload}
                   acceptClaim={() => this.props.acceptClaim(index, bounty.claimID)}
-                  rejectClaim={this.props.rejectClaim}
+                  rejectClaim={() => this.props.rejectClaim(index)}
                 />
               )
             } else {
