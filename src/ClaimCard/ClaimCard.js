@@ -15,8 +15,8 @@ class ClaimCard extends Component {
           alignItems: "center",
           marginBottom: "25px",
           marginTop: "25px",
-          marginLeft: "4%",
-          marginRight: "4%"
+          marginLeft: "2%",
+          marginRight: "2%"
         }}
         className={`bounty-shadow`}
       >
@@ -44,7 +44,7 @@ class ClaimCard extends Component {
         <div 
             style={{
               display: "flex",
-              justifyContent: "spaceBetween"
+              justifyContent: "spaceEvenly"
             }}
           >
             <Button 
