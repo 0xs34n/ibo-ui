@@ -50,6 +50,14 @@ class App extends Component {
     };
   }
 
+  rejectBounty() {
+
+  }
+
+  acceptBounty() {
+    
+  }
+
   componentDidMount() {
     var self = this;
     async.waterfall([
