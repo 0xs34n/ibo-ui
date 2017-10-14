@@ -84,7 +84,7 @@ class App extends Component {
             let ibo = truffle(IBO);
             ibo.setProvider(window.web3.currentProvider);
             ibo.setNetwork("3");
-            ibo = ibo.at("0x936ee8d3dc7e47d4835b259bbc7a39cdd46a04be");
+            ibo = ibo.at("0x10Ecbe4ee3C8E6a383a1eDe461B8B20586370e37");
             callback(null, {web3 : window.web3, contracts: { ibo }});
           }
         });
