@@ -105,7 +105,7 @@ class App extends Component {
     });
   }
 
-  createClaim = () => {
+  createClaim = (index) => {
     let ibo = this.state.contracts.ibo;
     ibo
       .CreateClaim(0, this.state.account, "0x123456", {
