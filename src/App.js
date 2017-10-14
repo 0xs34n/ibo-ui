@@ -104,7 +104,7 @@ class App extends Component {
     });
   }
 
-  createClaim = () => {
+  createClaim = (index) => {
     let ibo = this.state.contracts.ibo;
     ibo = ibo.at("0x27d66ada64b713710de3323ae107d15b252666c6");
     ibo
