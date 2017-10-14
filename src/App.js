@@ -55,7 +55,13 @@ class App extends Component {
   }
 
   acceptBounty = () => {
-    console.log("accept bounty called");
+    debugger;
+    let ibo = this.state.contracts.ibo;
+    let account = this.state.account;
+    let claimID = 1;
+    ibo.approveClaim(claimID, {from : account}).then(function(tx) {
+      console.log(tx);
+    });
   }
 
   componentDidMount() {
@@ -70,6 +76,7 @@ class App extends Component {
             let ibo = truffle(IBO);
             ibo.setProvider(window.web3.currentProvider);
             ibo.setNetwork("3");
+            ibo = ibo.at("0x936ee8d3dc7e47d4835b259bbc7a39cdd46a04be");
             callback(null, {web3 : window.web3, contracts: { ibo }});
           }
         });
@@ -92,7 +99,6 @@ class App extends Component {
 
   createClaim = () => {
     let ibo = this.state.contracts.ibo;
-    ibo = ibo.at("0x27d66ada64b713710de3323ae107d15b252666c6");
     ibo
       .CreateClaim(0, this.state.account, "0x123456", {
         from: this.state.account
@@ -172,7 +178,7 @@ class App extends Component {
         />
         <Switch onChange={this.toAdmin} style={{ position: "absolute" }} />
         {this.state.isAdmin ? (
-          <Admin 
+          <Admin
             bounties={this.state.bounties}
             acceptBounty={this.acceptBounty}
             rejectBounty={this.rejectBounty}
