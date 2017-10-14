@@ -1,12 +1,34 @@
 import React, { Component } from 'react';
 import ClaimTitle from "./ClaimTitle.js";
 import ClaimCard from "./ClaimCard/ClaimCard.js";
+import Button from "antd/lib/button"
 
 class Admin extends Component {
+  state = { showModal: false }
+
+  showModal = () => {
+    this.setState({
+      showModal: true,
+    });
+  }
+
+  handleOk = (e) => {
+    this.setState({
+      showModal: false,
+    });
+  }
+
+  handleCancel = (e) => {
+    this.setState({
+      showModal: false,
+    });
+  }
+
   render() {
     return (
       <div>
         <ClaimTitle />
+        <Button type="primary" style={{display: "inline-block", marginRight: "50px"}}> Create Bounty </Button>
         <div style={{
           display: "flex",
           justifyContent: "spaceAround",
@@ -32,6 +54,18 @@ class Admin extends Component {
             }
             })}
         </div>
+        <Modal
+          title="Basic Modal"
+          visible={this.state.visible}
+          onOk={this.handleOk}
+          okText="CREATE"
+          cancelText="CANCEL"
+          onCancel={this.handleCancel}
+        >
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+        </Modal>
       </div>
     );
   }

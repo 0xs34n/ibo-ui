@@ -165,6 +165,19 @@ class App extends Component {
     });
   }
 
+  createBounty = (title, icon, details, reward) => {
+    const newBounty = {
+      title,
+      icon,
+      details,
+      reward,
+      upload: "",
+      claimed: false,
+      modalOpen: false,
+      claimID: 1
+    }
+  }
+
   render() {
     return (
       <div
