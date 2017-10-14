@@ -9,6 +9,7 @@ import Hunter from "./Hunter.js";
 import Web3 from "web3";
 import * as truffle from "truffle-contract";
 import IBO from "./contracts/IBO.json";
+import async from 'async';
 import "./App.css";
 
 class App extends Component {
@@ -53,21 +54,33 @@ class App extends Component {
 
   componentDidMount() {
     var self = this;
-    window.addEventListener("load", () => {
-      // Checking if Web3 has been injected by the browser (Mist/MetaMask)
-      if (typeof web3 !== "undefined") {
-        // Use Mist/MetaMask's provider
-        window.web3 = new Web3(window.web3.currentProvider);
-        let ibo = truffle(IBO);
-        ibo.setProvider(window.web3);
-        ibo.setNetwork("3");
-        self.setState({
-          web3: window.web3,
-          contracts: {
-            ibo
+    async.waterfall([
+      function (callback) {
+        window.addEventListener("load", () => {
+          // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+          if (typeof web3 !== "undefined") {
+            // Use Mist/MetaMask's provider
+            window.web3 = new Web3(window.web3.currentProvider);
+            let ibo = truffle(IBO);
+            ibo.setProvider(window.web3.currentProvider);
+            ibo.setNetwork("3");
+            callback(null, {web3 : window.web3, contracts: { ibo }});
           }
         });
+      },
+      function (bc, callback) {
+        let web3 = bc.web3;
+        web3.eth.getAccounts(function (error, accounts) {
+          callback(error, {bc: bc, account : accounts[0]});
+        })
+
       }
+    ], function(error, data) {
+        self.setState({
+          web3 : data.bc.web3,
+          account : data.account,
+          contracts : data.bc.contracts
+        });
     });
   }
 
@@ -76,11 +89,10 @@ class App extends Component {
     let web3 = this.state.web3;
     ibo = ibo.at("0x27d66ada64b713710de3323ae107d15b252666c6");
     ibo
-      .CreateClaim(0, "0xA0B39867b0999DcF7Af65ea674c3C975EaD99158", "0x123456", {
-        from: "0xA0B39867b0999DcF7Af65ea674c3C975EaD99158"
+      .CreateClaim(0, this.state.account, "0x123456", {
+        from: this.state.account
       })
       .then(txHash => console.log(txHash));
-    debugger;
   };
 
   toAdmin = () => {
