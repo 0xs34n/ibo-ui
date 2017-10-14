@@ -26,7 +26,8 @@ class App extends Component {
           reward: 100,
           upload: "",
           claimed: false,
-          modalOpen: false
+          modalOpen: false,
+          claimID: 1
         },
         {
           title: "POST TO FACEBOOK",
@@ -35,7 +36,8 @@ class App extends Component {
           reward: 250,
           upload: "",
           claimed: false,
-          modalOpen: false
+          modalOpen: false,
+          claimID: 1
         },
         {
           title: "POST TO PINTEREST",
@@ -44,24 +46,30 @@ class App extends Component {
           reward: 50,
           upload: "",
           claimed: false,
-          modalOpen: false
+          modalOpen: false,
+          claimID: 1
         }
       ]
     };
   }
 
-  rejectBounty = () => {
-    console.log("reject bounty called");
+  rejectClaim = (index) => {
+    this.setState({
+      bounties: this.state.bounties.map((bounty, bountyIndex) => {
+        if (index === bountyIndex) {
+          return {
+            ...bounty,
+            upload: ""
+          };
+        } else {
+          return bounty;
+        }
+      })
+    });
   }
 
-  acceptBounty = () => {
-    debugger;
-    let ibo = this.state.contracts.ibo;
-    let account = this.state.account;
-    let claimID = 1;
-    ibo.approveClaim(claimID, {from : account}).then(function(tx) {
-      console.log(tx);
-    });
+  acceptClaim = (bountyID, claimID) => {
+    console.log("accept bounty called");
   }
 
   componentDidMount() {
@@ -115,7 +123,6 @@ class App extends Component {
   closeModal = index => {
     this.setState({
       bounties: this.state.bounties.map((bounty, bountyIndex) => {
-        console.log(bountyIndex, index);
         if (index === bountyIndex) {
           return {
             ...bounty,
@@ -158,6 +165,19 @@ class App extends Component {
     });
   }
 
+  createBounty = (title, icon, details, reward) => {
+    const newBounty = {
+      title,
+      icon,
+      details,
+      reward,
+      upload: "",
+      claimed: false,
+      modalOpen: false,
+      claimID: 1
+    }
+  }
+
   render() {
     return (
       <div
@@ -180,8 +200,8 @@ class App extends Component {
         {this.state.isAdmin ? (
           <Admin
             bounties={this.state.bounties}
-            acceptBounty={this.acceptBounty}
-            rejectBounty={this.rejectBounty}
+            acceptClaim={this.acceptClaim}
+            rejectClaim={this.rejectClaim}
           />
         ) : (
           <Hunter
