@@ -36,6 +36,7 @@ class BountyCard extends Component {
     }
     if (status === "done") {
       message.success(`${info.file.name} file uploaded successfully.`);
+      console.log(info.file.thumbUrl)
       this.props.createClaim()
       
     } else if (status === "error") {
