@@ -22,11 +22,9 @@ class Admin extends Component {
                 <ClaimCard
                   key={index}
                   title={bounty.title}
-                  icon={bounty.upload}
-                  details={bounty.details}
                   upload={bounty.upload}
-                  acceptBounty={this.props.acceptBounty}
-                  rejectBounty={this.props.rejectBounty}
+                  acceptClaim={() => this.props.acceptClaim(index, bounty.claimID)}
+                  rejectClaim={this.props.rejectClaim}
                 />
               )
             } else {

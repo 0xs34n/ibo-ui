@@ -34,13 +34,14 @@ class ClaimCard extends Component {
               marginTop: "10px",
               marginRight: "auto",
               marginLeft: "auto",
-              marginBottom: "33px",
+              marginBottom: "15px",
               display: "block"
             }}
             src={this.props.upload}
             alt="bounty"
           />
         </a>
+        <div className="post-text" style={{textAlign: "center", marginBottom: "15px"}}>{this.props.title}</div>
         <div 
             style={{
               display: "flex",
@@ -50,14 +51,14 @@ class ClaimCard extends Component {
             <Button 
               type="primary" 
               className="claim-button"
-              onClick={this.props.acceptBounty}
+              onClick={this.props.acceptClaim}
             > 
               ACCEPT 
             </Button>
             <Button 
               type="danger"
               className="claim-button"
-              onClick={this.props.rejectBounty}
+              onClick={this.props.rejectClaim}
             > 
               REJECT
             </Button>

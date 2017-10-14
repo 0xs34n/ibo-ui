@@ -26,7 +26,8 @@ class App extends Component {
           reward: 100,
           upload: "",
           claimed: false,
-          modalOpen: false
+          modalOpen: false,
+          claimID: 1
         },
         {
           title: "POST TO FACEBOOK",
@@ -35,7 +36,8 @@ class App extends Component {
           reward: 250,
           upload: "",
           claimed: false,
-          modalOpen: false
+          modalOpen: false,
+          claimID: 1
         },
         {
           title: "POST TO PINTEREST",
@@ -44,17 +46,18 @@ class App extends Component {
           reward: 50,
           upload: "",
           claimed: false,
-          modalOpen: false
+          modalOpen: false,
+          claimID: 1
         }
       ]
     };
   }
 
-  rejectBounty = () => {
+  rejectClaim = () => {
     console.log("reject bounty called");
   }
 
-  acceptBounty = () => {
+  acceptClaim = (bountyID, claimID) => {
     console.log("accept bounty called");
   }
 
@@ -174,8 +177,8 @@ class App extends Component {
         {this.state.isAdmin ? (
           <Admin 
             bounties={this.state.bounties}
-            acceptBounty={this.acceptBounty}
-            rejectBounty={this.rejectBounty}
+            acceptClaim={this.acceptClaim}
+            rejectClaim={this.rejectClaim}
           />
         ) : (
           <Hunter
