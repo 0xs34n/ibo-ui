@@ -1,10 +1,127 @@
 import React, { Component } from "react";
-import BountyCard from "./BountyCard.js";
+import BountyCard from "./BountyCard/BountyCard.js";
 import BountyTitle from "./BountyTitle.js";
 import Particles from "react-particles-js";
+import particleSettings from "./particle.js";
+import Switch from "antd/lib/switch";
+import Admin from "./Admin.js";
+import Hunter from "./Hunter.js";
+import Web3 from "web3";
+import * as truffle from "truffle-contract";
+import IBO from "./contracts/IBO.json";
 import "./App.css";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isAdmin: false,
+      web3: null,
+      contracts: {},
+      bounties: [
+        {
+          title: "POST TO TWITTER",
+          icon: "twitter",
+          details: "Post on twitter about Hack ETH and receive 100 coins",
+          reward: 100,
+          upload: "",
+          claimed: false,
+          modalOpen: false
+        },
+        {
+          title: "POST TO FACEBOOK",
+          icon: "facebook",
+          details: "Post on twitter about Hack ETH and receive 100 coins",
+          reward: 250,
+          upload: "",
+          claimed: false,
+          modalOpen: false
+        },
+        {
+          title: "POST TO PINTEREST",
+          icon: "pinterest",
+          details: "Post on twitter about Hack ETH and receive 100 coins",
+          reward: 50,
+          upload: "",
+          claimed: false,
+          modalOpen: false
+        }
+      ]
+    };
+  }
+
+  componentDidMount() {
+    var self = this;
+    window.addEventListener("load", () => {
+      // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+      if (typeof web3 !== "undefined") {
+        // Use Mist/MetaMask's provider
+        window.web3 = new Web3(window.web3.currentProvider);
+        let ibo = truffle(IBO);
+        ibo.setProvider(window.web3);
+        ibo.setNetwork("3");
+        self.setState({
+          web3: window.web3,
+          contracts: {
+            ibo
+          }
+        });
+      }
+    });
+  }
+
+  createClaim = () => {
+    let ibo = this.state.contracts.ibo;
+    let web3 = this.state.web3;
+    ibo = ibo.at("0x27d66ada64b713710de3323ae107d15b252666c6");
+    ibo
+      .CreateClaim(0, "0xA0B39867b0999DcF7Af65ea674c3C975EaD99158", "0x123456", {
+        from: "0xA0B39867b0999DcF7Af65ea674c3C975EaD99158"
+      })
+      .then(txHash => console.log(txHash));
+    debugger;
+  };
+
+  toAdmin = () => {
+    this.setState({
+      isAdmin: !this.state.isAdmin
+    });
+  };
+
+  closeModal = index => {
+    this.setState({
+      bounties: this.state.bounties.map((bounty, bountyIndex) => {
+        console.log(bountyIndex, index);
+        if (index === bountyIndex) {
+          return {
+            ...bounty,
+            modalOpen: false
+          };
+        } else {
+          return bounty;
+        }
+      })
+    });
+  };
+
+  openModal = index => {
+    this.setState({
+      bounties: this.state.bounties.map((bounty, bountyIndex) => {
+        console.log(bountyIndex, index);
+        if (index === bountyIndex) {
+          console.log("true!");
+          return {
+            ...bounty,
+            modalOpen: true
+          };
+        } else {
+          return bounty;
+        }
+      })
+    });
+  };
+
   render() {
     return (
       <div
@@ -14,110 +131,7 @@ class App extends Component {
         }}
       >
         <Particles
-          params={{
-            particles: {
-              number: {
-                value: 20,
-                density: {
-                  enable: true,
-                  value_area: 700
-                }
-              },
-              color: {
-                value: ["#aa73ff", "#f8c210", "#83d238", "#33b1f8"]
-              },
-              shape: {
-                type: "circle",
-                stroke: {
-                  width: 0,
-                  color: "#000000"
-                },
-                polygon: {
-                  nb_sides: 15
-                }
-              },
-              opacity: {
-                value: 0.5,
-                random: false,
-                anim: {
-                  enable: false,
-                  speed: 1.5,
-                  opacity_min: 0.15,
-                  sync: false
-                }
-              },
-              size: {
-                value: 2.5,
-                random: false,
-                anim: {
-                  enable: true,
-                  speed: 2,
-                  size_min: 0.15,
-                  sync: false
-                }
-              },
-              line_linked: {
-                enable: true,
-                distance: 110,
-                color: "#33b1f8",
-                opacity: 0.25,
-                width: 1
-              },
-              move: {
-                enable: true,
-                speed: 1.6,
-                direction: "none",
-                random: false,
-                straight: false,
-                out_mode: "out",
-                bounce: false,
-                attract: {
-                  enable: false,
-                  rotateX: 600,
-                  rotateY: 1200
-                }
-              }
-            },
-            interactivity: {
-              detect_on: "canvas",
-              events: {
-                onhover: {
-                  enable: false,
-                  mode: "repulse"
-                },
-                onclick: {
-                  enable: false,
-                  mode: "push"
-                },
-                resize: true
-              },
-              modes: {
-                grab: {
-                  distance: 400,
-                  line_linked: {
-                    opacity: 1
-                  }
-                },
-                bubble: {
-                  distance: 400,
-                  size: 40,
-                  duration: 2,
-                  opacity: 8,
-                  speed: 3
-                },
-                repulse: {
-                  distance: 200,
-                  duration: 0.4
-                },
-                push: {
-                  particles_nb: 4
-                },
-                remove: {
-                  particles_nb: 2
-                }
-              }
-            }
-          }}
+          params={particleSettings}
           style={{
             position: "fixed",
             top: 0,
@@ -126,20 +140,39 @@ class App extends Component {
             height: "100%"
           }}
         />
-        <BountyTitle />
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-evenly"
-          }}
-        >
-          <BountyCard />
-          <BountyCard />
-          <BountyCard />
-        </div>
+        <Switch onChange={this.toAdmin} style={{ position: "absolute" }} />
+        {this.state.isAdmin ? (
+          <Admin />
+        ) : (
+          <Hunter
+            closeModal={this.closeModal}
+            openModal={this.openModal}
+            bounties={this.state.bounties}
+            createClaim={this.createClaim}
+          />
+        )}
       </div>
     );
   }
 }
+
+/*
+<BountyCard>
+            <TwitterSquare size={size} style={{...picStyle, color: "#1DA1F2"}}/>
+            <div className="post-text">POST ON TWITTER</div>
+            <Button type="primary" className="details-button"> DETAILS </Button>
+            <Modal title="POST ON TWITTER">
+          </BountyCard>
+          <BountyCard>
+            <FbSquare size={size} style={{...picStyle, color: "#0084FF"}}/>
+            <div className="post-text">POST ON FACEBOOK</div>
+            <Button type="primary" className="details-button"> DETAILS </Button>
+          </BountyCard>
+          <BountyCard>
+            <PinterestSquare size={size} style={{...picStyle, color: "#BD081C"}}/>
+            <div className="post-text">POST ON PINTEREST</div>
+            <Button type="primary" className="details-button"> DETAILS </Button>
+          </BountyCard>
+*/
 
 export default App;

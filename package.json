@@ -6,8 +6,11 @@
     "antd": "^2.13.6",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-icons": "^2.2.7",
     "react-particles-js": "^2.0.0",
-    "react-scripts": "1.0.14"
+    "react-scripts": "1.0.14",
+    "truffle-contract": "^3.0.0",
+    "web3": "^1.0.0-beta.23"
   },
   "scripts": {
     "start": "react-scripts start",

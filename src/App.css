@@ -42,3 +42,40 @@
 .bounty-shadow:hover {
   box-shadow: 0 60px 120px -10px rgba(10, 16, 34, .2) !important;
 }
+
+.social {
+  box-shadow: 0 2px 2px 0 rgba(10, 16, 34, .2);
+  border-radius: 25px;
+}
+
+.post-text {
+  margin-top: 12px;
+  font-weight: 800;
+}
+
+.reward-text {
+  text-align: center;
+  font-size: 32pt;
+  font-weight: 300;
+}
+
+.details-button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 12px;
+  margin-bottom: 7px;
+}
+
+.hideUpload > .ant-upload {
+  display: none;
+}
+
+.ant-upload-drag-icon {
+  margin-top: 30px;
+}
+
+.ant-upload-text {
+  margin-bottom: 30px;
+}
+

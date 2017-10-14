@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-class BountyTitle extends Component {
+class ClaimTitle extends Component {
   render() {
     return (
-      <h1
+        <h1
         style={{
           width: "100%",
           marginLeft: "13vw",
@@ -13,10 +13,10 @@ class BountyTitle extends Component {
           fontSize: "36pt"
         }}
       >
-        BOUNTY LIST
+        CLAIMS
       </h1>
     );
   }
 }
 
-export default BountyTitle;
+export default ClaimTitle;
