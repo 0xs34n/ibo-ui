@@ -1,16 +1,6 @@
 import React, { Component } from "react";
 import Card from "antd/lib/card";
-import FbSquare from "react-icons/lib/fa/facebook-square";
-import TwitterSquare from "react-icons/lib/fa/twitter-square";
-import PinterestSquare from "react-icons/lib/fa/pinterest-square";
 import Button from "antd/lib/button";
-const size = 60;
-const picStyle = {
-  display: "block",
-  marginLeft: "auto",
-  marginRight: "auto",
-  marginTop: "5px"
-};
 
 class ClaimCard extends Component {
   render() {
@@ -48,6 +38,7 @@ class ClaimCard extends Component {
               display: "block"
             }}
             src={this.props.upload}
+            alt="bounty"
           />
           <div 
             style={{

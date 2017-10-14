@@ -17,8 +17,7 @@ class Admin extends Component {
           marginLeft: "10%"
         }}>
           {this.props.bounties.map((bounty, index) => {
-            if(bounty.claimed === true) {
-              console.log(bounty.uploaded)
+            if(bounty.upload !== "") {
               return (
                 <ClaimCard
                   key={index}
@@ -27,7 +26,9 @@ class Admin extends Component {
                   details={bounty.details}
                   upload={bounty.upload}
                 />
-            )
+              )
+            } else {
+              return null;
             }
             })}
         </div>

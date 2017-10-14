@@ -21,15 +21,18 @@ class Hunter extends Component {
           {this.props.bounties.map((bounty, index) => (
             <BountyCard
               key={index}
+              index={index}
               title={bounty.title}
               icon={bounty.icon}
               details={bounty.details}
               reward={bounty.reward}
               claimed={bounty.claimed}
               modalOpen={bounty.modalOpen}
+              upload={bounty.upload}
               closeModal={() => this.props.closeModal(index)}
               openModal={() => this.props.openModal(index)}
               createClaim={this.props.createClaim}
+              uploadBounty={this.props.uploadBounty}
             />
             ))}
         </div>

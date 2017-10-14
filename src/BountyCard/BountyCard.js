@@ -20,30 +20,19 @@ const picStyle = {
 class BountyCard extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      hideUpload: false
-    };
   }
 
   onUpload = info => {
     const status = info.file.status;
-    this.setState({
-      hideUpload: true
-    });
     if (status !== "uploading") {
       console.log(info.file, info.fileList);
     }
     if (status === "done") {
       message.success(`${info.file.name} file uploaded successfully.`);
-      console.log(info.file.thumbUrl)
+      this.props.uploadBounty(this.props.index, info.file.thumbUrl)
       this.props.createClaim()
-      
     } else if (status === "error") {
       message.error(`${info.file.name} file upload failed.`);
-      this.setState({
-        hideUpload: false
-      });
     }
   };
 
@@ -114,7 +103,7 @@ class BountyCard extends Component {
               onChange={this.onUpload}
               action="http://mockbin.com/request?foo=bar&foo=baz"
               listType="picture"
-              className={this.state.hideUpload ? "hideUpload" : null}
+              className={this.props.upload !== "" ? "hideUpload" : null}
               showUploadList={{ showPreviewIcon: false, showRemoveIcon: false }}
             >
               <p className="ant-upload-drag-icon">
@@ -125,18 +114,18 @@ class BountyCard extends Component {
               </p>
             </Dragger>
           </div>
-          {this.state.hideUpload ? (
+          {this.props.upload !== "" ? (
             <div
               style={{ textAlign: "center", fontSize: "18pt", fontWeight: "800" }}
             >
               <Icon 
                 type={`${this.props.claimed ? "check-circle-o" : "loading"}`}
-                style={{color: `${this.props.claimed ? "#3dbd7d" : "#ffce3d"}`, marginRight: "7px"}}
+                style={{marginRight: "7px", color: `${this.props.claimed ? "#3dbd7d" : "#ffdd76"}`}}
               />{"  "}
               <span>
                 {`${this.props.claimed
                 ? "Approved"
-                : "Awaiting approval"}`}
+                : "Awaiting Approval"}`}
               </span>
             </div>
           ) : null}
