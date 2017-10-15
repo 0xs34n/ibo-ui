@@ -69,12 +69,23 @@ class App extends Component {
   }
 
   acceptClaim = (bountyID, claimID) => {
-    bountyID = bountyID + 1;
-    let self;
+    let self = this;
     let ibo = this.state.contracts.ibo;
-    ibo.approveClaim(bountyID, claimID, {from : this.state.account}).then(function(tx) {
-      // accept claim callback;
-    })
+    ibo.approveClaim(bountyID + 1, claimID, {from : this.state.account}).then(function(tx) {
+      self.setState({
+        bounties : self.state.bounties.map((bounty, bountyIndex) => {
+          if (bountyIndex === bountyID) {
+            return {
+              ...bounty,
+              claimed: true,
+              upload : ""
+            }
+          } else {
+            return bounty;
+          }
+        })
+      })
+    });
   }
 
   componentDidMount() {
