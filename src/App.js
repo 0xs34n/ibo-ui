@@ -183,12 +183,32 @@ class App extends Component {
     });
   }
 
+  infiniteUpload = (index, upload) => {
+    this.setState({
+      bounties: this.state.bounties.map((bounty, bountyIndex) => {
+        if (index === bountyIndex) {
+          return {
+            ...bounty,
+            upload: upload,
+            claimed: true
+          };
+        } else {
+          return bounty;
+        }
+      })
+    })
+  }
+
   infiniteClaim = () => {
-    
+
   }
     
-  milestoneClaim = () => {
+  milestoneUpload = () => {
   
+  }
+
+  milestoneClaim = () => {
+
   }
 
   createBounty = (title, icon, details, reward) => {
