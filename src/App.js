@@ -100,7 +100,7 @@ class App extends Component {
             let ibo = truffle(IBO);
             ibo.setProvider(window.web3.currentProvider);
             ibo.setNetwork("3");
-            ibo = ibo.at("0xe03768e6A5369e5915B7Db6E35A5E3D5330a916A");
+            ibo = ibo.at("0xb3b22ea3c8382403ade51441515c1b236453626b");
             callback(null, {web3 : window.web3, contracts: { ibo }});
           }
         });
@@ -122,13 +122,21 @@ class App extends Component {
   }
 
   createClaim = (index) => {
+    debugger;
     let self = this;
     let ibo = this.state.contracts.ibo;
     ibo
-      .CreateClaim(index+1 , this.state.account, "0x123456", {
+      .CreateClaim(index+1 , "0x123456", {
         from: this.state.account
       }).then((tx) => {
-        self.closeModal(index);
+        if (index === 0) {
+          self.closeModal(index);
+        } else if (index === 1) {
+          window.location.href = '/';
+        } else {
+
+        }
+
       });
   };
 
