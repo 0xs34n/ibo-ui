@@ -99,7 +99,6 @@ class BountyCard extends Component {
             onChange={this.onUpload}
             action="http://mockbin.com/request?foo=bar&foo=baz"
             listType="picture"
-            className={this.props.upload !== "" || this.props.claimed === true ? "hideUpload" : null}
             showUploadList={{ showPreviewIcon: false, showRemoveIcon: false }}
           >
             <p className="ant-upload-drag-icon">

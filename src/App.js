@@ -199,18 +199,6 @@ class App extends Component {
     })
   }
 
-  infiniteClaim = () => {
-
-  }
-    
-  milestoneUpload = () => {
-  
-  }
-
-  milestoneClaim = () => {
-
-  }
-
   createBounty = (title, icon, details, reward) => {
     const newBounty = {
       title,
@@ -256,6 +244,7 @@ class App extends Component {
             bounties={this.state.bounties}
             createClaim={this.createClaim}
             uploadBounty={this.uploadBounty}
+            infiniteUpload={this.infiniteUpload}
           />
         )}
       </div>
