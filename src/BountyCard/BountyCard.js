@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import Card from "antd/lib/card";
-import FbSquare from "react-icons/lib/fa/facebook-square";
-import TwitterSquare from "react-icons/lib/fa/twitter-square";
+import FbSquare from "react-icons/lib/fa/phone-square";
+import TwitterSquare from "react-icons/lib/fa/file-image-o";
 import PinterestSquare from "react-icons/lib/fa/pinterest-square";
 import Modal from "antd/lib/modal";
 import Button from "antd/lib/button";
 import Upload from "antd/lib/upload";
 import Icon from "antd/lib/icon";
 import message from "antd/lib/message";
+import Input from "antd/lib/input";
 const Dragger = Upload.Dragger;
 const size = 60;
 const picStyle = {
@@ -57,6 +58,33 @@ class BountyCard extends Component {
     }
   }
 
+  renderInput(icon) {
+    if(icon === "twitter") {
+      return (
+        <Dragger
+        onChange={this.onUpload}
+        action="http://mockbin.com/request?foo=bar&foo=baz"
+        listType="picture"
+        className={this.props.upload !== "" ? "hideUpload" : null}
+        showUploadList={{ showPreviewIcon: false, showRemoveIcon: false }}
+      >
+        <p className="ant-upload-drag-icon">
+          <Icon type="inbox" />
+        </p>
+        <p className="ant-upload-text">
+          Click or drag file to this area to upload
+        </p>
+      </Dragger>
+      )
+    } else if(icon === "facebook") {
+      return (
+        <Input addonBefore="+1" style={{ width: '100%' }} />
+      )
+    } else {
+      return null
+    }
+  }
+
   render() {
     return (
       <Card
@@ -94,23 +122,9 @@ class BountyCard extends Component {
         >
           {this.props.details}
           <div style={{ marginTop: "15px", marginBottom: "15px" }}>
-            {/* check action */}
-            <Dragger
-              onChange={this.onUpload}
-              action="http://mockbin.com/request?foo=bar&foo=baz"
-              listType="picture"
-              className={this.props.upload !== "" ? "hideUpload" : null}
-              showUploadList={{ showPreviewIcon: false, showRemoveIcon: false }}
-            >
-              <p className="ant-upload-drag-icon">
-                <Icon type="inbox" />
-              </p>
-              <p className="ant-upload-text">
-                Click or drag file to this area to upload
-              </p>
-            </Dragger>
+            {this.renderInput(this.props.icon)}
           </div>
-          {this.props.upload !== "" ? (
+          {this.props.upload !== "" && this.props.claimed === false ? (
             <div
               style={{ textAlign: "center", fontSize: "18pt", fontWeight: "800" }}
             >

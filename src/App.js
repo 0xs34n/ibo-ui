@@ -20,9 +20,9 @@ class App extends Component {
       contracts: {},
       bounties: [
         {
-          title: "POST TO TWITTER",
+          title: "UPLOAD AN IMAGE",
           icon: "twitter",
-          details: "Post on twitter about Hack ETH and receive 100 coins",
+          details: "Upload a dank image and receive 100 tokens",
           reward: 100,
           upload: "",
           claimed: false,
@@ -30,9 +30,9 @@ class App extends Component {
           claimID: 1
         },
         {
-          title: "POST TO FACEBOOK",
+          title: "ENTER YOUR PHONE NUMBER",
           icon: "facebook",
-          details: "Post on twitter about Hack ETH and receive 100 coins",
+          details: "Enter your phone number and receive 250 tokens",
           reward: 250,
           upload: "",
           claimed: false,
