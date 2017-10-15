@@ -20,7 +20,7 @@ class App extends Component {
       contracts: {},
       bounties: [
         {
-          title: "UPLOAD AN IMAGE",
+          title: "NORMAL CLAIM",
           icon: "twitter",
           details: "Upload a dank image and receive 100 tokens",
           reward: 100,
@@ -30,7 +30,7 @@ class App extends Component {
           claimID: 1
         },
         {
-          title: "ENTER YOUR PHONE NUMBER",
+          title: "INFINITE CLAIM",
           icon: "facebook",
           details: "Enter your phone number and receive 250 tokens",
           reward: 250,
@@ -40,10 +40,10 @@ class App extends Component {
           claimID: 1
         },
         {
-          title: "POST TO PINTEREST",
+          title: "MILESTONE CLAIM",
           icon: "pinterest",
           details: "Post on twitter about Hack ETH and receive 100 coins",
-          reward: 50,
+          reward: 500,
           upload: "",
           claimed: false,
           modalOpen: false,
