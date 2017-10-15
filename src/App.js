@@ -69,7 +69,12 @@ class App extends Component {
   }
 
   acceptClaim = (bountyID, claimID) => {
-    console.log("accept bounty called");
+    bountyID = bountyID + 1;
+    let self;
+    let ibo = this.state.contracts.ibo;
+    ibo.approveClaim(bountyID, claimID, {from : this.state.account}).then(function(tx) {
+      // accept claim callback;
+    })
   }
 
   componentDidMount() {
@@ -84,7 +89,7 @@ class App extends Component {
             let ibo = truffle(IBO);
             ibo.setProvider(window.web3.currentProvider);
             ibo.setNetwork("3");
-            ibo = ibo.at("0x10Ecbe4ee3C8E6a383a1eDe461B8B20586370e37");
+            ibo = ibo.at("0xe03768e6A5369e5915B7Db6E35A5E3D5330a916A");
             callback(null, {web3 : window.web3, contracts: { ibo }});
           }
         });
@@ -108,7 +113,7 @@ class App extends Component {
   createClaim = (index) => {
     let ibo = this.state.contracts.ibo;
     ibo
-      .CreateClaim(0, this.state.account, "0x123456", {
+      .CreateClaim(index+1 , this.state.account, "0x123456", {
         from: this.state.account
       })
       .then(txHash => console.log(txHash));
