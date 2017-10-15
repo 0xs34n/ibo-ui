@@ -19,6 +19,10 @@ const picStyle = {
 };
 
 class BountyCard extends Component {
+  state = {
+    file: null
+  }
+
   onUpload = info => {
     const status = info.file.status;
     if (status !== "uploading") {
@@ -26,12 +30,22 @@ class BountyCard extends Component {
     }
     if (status === "done") {
       message.success(`${info.file.name} file uploaded successfully.`);
-      this.props.uploadBounty(this.props.index, info.file.thumbUrl)
-      this.props.createClaim()
+      this.setState({
+        file: info.file.thumbUrl
+      })
     } else if (status === "error") {
       message.error(`${info.file.name} file upload failed.`);
     }
   };
+
+  onSubmit = () => {
+    if (this.props.index === 0) {
+      this.props.uploadBounty(this.props.index, this.state.file)
+    } else {
+      this.props.infiniteUpload(this.props.index, this.state.file)
+    }
+    this.props.createClaim()
+  }
 
   renderIcon(icon) {
     switch (icon) {
@@ -87,7 +101,7 @@ class BountyCard extends Component {
         </Button>
         <Modal
           title={this.props.title}
-          onOk={this.props.closeModal}
+          onOk={this.onSubmit}
           onCancel={this.props.closeModal}
           okText="Submit"
           cancelText="Cancel"

@@ -131,7 +131,7 @@ class App extends Component {
       }).then((tx) => {
         if (index === 0) {
           self.closeModal(index);
-        } else if (index === 1) {
+        } else if (index === 1 || index === 2) {
           window.location.href = '/';
         } else {
 
@@ -207,19 +207,6 @@ class App extends Component {
     })
   }
 
-  infiniteClaim = () => {
-    var ibo = this.state.contracts.ibo;
-    ibo.CreateClaim()
-  }
-
-  milestoneUpload = () => {
-
-  }
-
-  milestoneClaim = () => {
-
-  }
-
   createBounty = (title, icon, details, reward) => {
     const newBounty = {
       title,
@@ -265,6 +252,7 @@ class App extends Component {
             bounties={this.state.bounties}
             createClaim={this.createClaim}
             uploadBounty={this.uploadBounty}
+            infiniteUpload={this.infiniteUpload}
           />
         )}
       </div>

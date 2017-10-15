@@ -33,6 +33,7 @@ class Hunter extends Component {
               openModal={() => this.props.openModal(index)}
               createClaim={() => this.props.createClaim(index)}
               uploadBounty={this.props.uploadBounty}
+              infiniteUpload={() => this.props.infiniteUpload(index)}
             />
             ))}
         </div>
