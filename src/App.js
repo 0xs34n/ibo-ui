@@ -122,12 +122,14 @@ class App extends Component {
   }
 
   createClaim = (index) => {
+    let self = this;
     let ibo = this.state.contracts.ibo;
     ibo
       .CreateClaim(index+1 , this.state.account, "0x123456", {
         from: this.state.account
-      })
-      .then(txHash => console.log(txHash));
+      }).then((tx) => {
+        self.closeModal(index);
+      });
   };
 
   toAdmin = () => {
