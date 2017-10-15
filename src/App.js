@@ -32,7 +32,7 @@ class App extends Component {
         {
           title: "INFINITE CLAIM",
           icon: "facebook",
-          details: "Enter your phone number and receive 250 tokens",
+          details: "The earlier you upload the image, the more tokens you will receive!",
           reward: 250,
           upload: "",
           claimed: false,
@@ -86,14 +86,6 @@ class App extends Component {
         })
       })
     });
-  }
-
-  infiniteClaim = () => {
-
-  }
-
-  milestoneClaim = () => {
-    
   }
 
   componentDidMount() {
@@ -187,6 +179,14 @@ class App extends Component {
         }
       })
     });
+  }
+
+  infiniteClaim = () => {
+    
+  }
+    
+  milestoneClaim = () => {
+  
   }
 
   createBounty = (title, icon, details, reward) => {
