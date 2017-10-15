@@ -88,6 +88,14 @@ class App extends Component {
     });
   }
 
+  infiniteClaim = () => {
+
+  }
+
+  milestoneClaim = () => {
+    
+  }
+
   componentDidMount() {
     var self = this;
     async.waterfall([

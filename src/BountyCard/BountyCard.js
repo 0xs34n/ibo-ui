@@ -39,18 +39,18 @@ class BountyCard extends Component {
         return (
           <TwitterSquare
             size={size}
-            style={{ ...picStyle, color: "#1DA1F2" }}
+            style={{ ...picStyle, color: "#3dbd7d" }}
           />
         );
       case "facebook":
         return (
-          <FbSquare size={size} style={{ ...picStyle, color: "#3B5998" }} />
+          <FbSquare size={size} style={{ ...picStyle, color: "#49a9ee" }} />
         );
       case "pinterest":
         return (
           <PinterestSquare
             size={size}
-            style={{ ...picStyle, color: "#BD081C" }}
+            style={{ ...picStyle, color: "#f46e65" }}
           />
         );
       default:
@@ -99,7 +99,7 @@ class BountyCard extends Component {
             onChange={this.onUpload}
             action="http://mockbin.com/request?foo=bar&foo=baz"
             listType="picture"
-            className={this.props.upload !== "" && this.props.claimed === true ? "hideUpload" : null}
+            className={this.props.upload !== "" || this.props.claimed === true ? "hideUpload" : null}
             showUploadList={{ showPreviewIcon: false, showRemoveIcon: false }}
           >
             <p className="ant-upload-drag-icon">
