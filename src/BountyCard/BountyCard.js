@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Card from "antd/lib/card";
-import FbSquare from "react-icons/lib/fa/phone-square";
+import FbSquare from "react-icons/lib/fa/file-image-o";
 import TwitterSquare from "react-icons/lib/fa/file-image-o";
-import PinterestSquare from "react-icons/lib/fa/pinterest-square";
+import PinterestSquare from "react-icons/lib/fa/file-image-o";
 import Modal from "antd/lib/modal";
 import Button from "antd/lib/button";
 import Upload from "antd/lib/upload";
@@ -58,33 +58,6 @@ class BountyCard extends Component {
     }
   }
 
-  renderInput(icon) {
-    if(icon === "twitter") {
-      return (
-        <Dragger
-        onChange={this.onUpload}
-        action="http://mockbin.com/request?foo=bar&foo=baz"
-        listType="picture"
-        className={this.props.upload !== "" ? "hideUpload" : null}
-        showUploadList={{ showPreviewIcon: false, showRemoveIcon: false }}
-      >
-        <p className="ant-upload-drag-icon">
-          <Icon type="inbox" />
-        </p>
-        <p className="ant-upload-text">
-          Click or drag file to this area to upload
-        </p>
-      </Dragger>
-      )
-    } else if(icon === "facebook") {
-      return (
-        <Input addonBefore="+1" style={{ width: '100%' }} />
-      )
-    } else {
-      return null
-    }
-  }
-
   render() {
     return (
       <Card
@@ -104,7 +77,7 @@ class BountyCard extends Component {
       >
         {this.renderIcon(this.props.icon)}
         <div className="post-text">{this.props.title}</div>
-        <div className="reward-text">${this.props.reward}</div>
+        <div className="reward-text">{this.props.reward} BT</div>
         <Button
           type="primary"
           className="details-button"
@@ -122,9 +95,22 @@ class BountyCard extends Component {
         >
           {this.props.details}
           <div style={{ marginTop: "15px", marginBottom: "15px" }}>
-            {this.renderInput(this.props.icon)}
+          <Dragger
+            onChange={this.onUpload}
+            action="http://mockbin.com/request?foo=bar&foo=baz"
+            listType="picture"
+            className={this.props.upload !== "" && this.props.claimed === true ? "hideUpload" : null}
+            showUploadList={{ showPreviewIcon: false, showRemoveIcon: false }}
+          >
+            <p className="ant-upload-drag-icon">
+              <Icon type="inbox" />
+            </p>
+            <p className="ant-upload-text">
+              Click or drag file to this area to upload
+            </p>
+          </Dragger>
           </div>
-          {this.props.upload !== "" && this.props.claimed === false ? (
+          {this.props.upload !== "" || this.props.claimed === true ? (
             <div
               style={{ textAlign: "center", fontSize: "18pt", fontWeight: "800" }}
             >

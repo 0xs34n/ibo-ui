@@ -49,8 +49,10 @@
 }
 
 .post-text {
+  text-align: center;
   margin-top: 12px;
   font-weight: 800;
+  font-size: 10pt;
 }
 
 .reward-text {
