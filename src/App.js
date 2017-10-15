@@ -208,11 +208,12 @@ class App extends Component {
   }
 
   infiniteClaim = () => {
-
+    var ibo = this.state.contracts.ibo;
+    ibo.CreateClaim()
   }
-    
+
   milestoneUpload = () => {
-  
+
   }
 
   milestoneClaim = () => {
