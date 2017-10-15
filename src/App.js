@@ -131,7 +131,7 @@ class App extends Component {
       }).then((tx) => {
         if (index === 0) {
           self.closeModal(index);
-        } else if (index === 1) {
+        } else if (index === 1 || index === 2) {
           window.location.href = '/';
         } else {
 

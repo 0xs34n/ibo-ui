@@ -39,7 +39,11 @@ class BountyCard extends Component {
   };
 
   onSubmit = () => {
-    this.props.uploadBounty(this.props.index, this.state.file)
+    if (this.props.index === 0) {
+      this.props.uploadBounty(this.props.index, this.state.file)
+    } else {
+      this.props.infiniteUpload(this.props.index, this.state.file)
+    }
     this.props.createClaim()
   }
 
